@@ -1,25 +1,15 @@
 from django.db import models
 
 
-class AccountType(models.Model):
+class Account(models.Model):
     TYPE_CHOICES = (
         ('current_account', 'Current Account'),
         ('saving_account', 'Saving Account'),
         ('life_assurance', 'Life Assurance'),
     )
 
-    name = models.CharField(max_length=50, choices=TYPE_CHOICES)
-
-    def __str__(self):
-        return self.name
-    
-    class Meta:
-        verbose_name_plural = "Account Types"
-
-
-class Account(models.Model):
     name = models.CharField(max_length=50)
-    account_type = models.ForeignKey(AccountType, on_delete=models.CASCADE)
+    account_type = models.CharField(max_length=50, choices=TYPE_CHOICES)
 
     def __str__(self):
         return self.name
@@ -55,7 +45,7 @@ class Transaction(models.Model):
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     account = models.ForeignKey(Account, on_delete=models.CASCADE)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    subcategory = models.ForeignKey(Subcategory, on_delete=models.CASCADE)
+    subcategory = models.ForeignKey(Subcategory, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
         return self.description
