@@ -22,11 +22,12 @@ from drf_spectacular.views import (
     SpectacularRedocView,
     SpectacularSwaggerView,
 )
-from finance_manager import urls as finance_manager_urls
+from finance_manager.urls import router as finance_manager_router
 
 
 router = routers.DefaultRouter()
-router.registry.extend(finance_manager_urls.router.registry)
+router.registry.extend(finance_manager_router.registry)
+
 
 urlpatterns = [
     path("admin/", admin.site.urls),
