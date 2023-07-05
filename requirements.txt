@@ -1,0 +1,6 @@
+django==4.2
+djangorestframework
+drf-spectacular
+psycopg2-binary
+uvicorn
+gunicorn
